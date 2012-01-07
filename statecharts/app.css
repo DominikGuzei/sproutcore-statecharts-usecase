@@ -1,0 +1,190 @@
+
+/* Application */
+
+body {
+  width: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+#app {
+  width: 40em;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+#timer {
+  background-color: #555;
+  display: inline-block;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  height: 6em;
+  padding: 0.3em;
+}
+
+/* DIGITAL TIME */
+
+#timer #digital {
+  width: 10em;
+  height: 6em;
+  float:left;
+}
+
+#timer #time-digital {
+  font-size: 2em;
+  color: white;
+  letter-spacing: 0.1em;
+  background-color: #333;
+  text-align: center;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+#timer #time-digital span {
+  position: relative;
+  top: 0.9em;
+}
+
+#graphical {
+  background-color: #333;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  display: inline-block;
+  height: 6em;
+  width: 29em;
+  margin-left: 0.3em;
+  position: relative;
+}
+
+/* CONTROLS */
+
+#timer .controls {
+  background-color: #98BE2C;
+  float:left;
+  height: 100%;
+  width: 5.5em;
+  
+  -moz-border-radius: 10px 0 0 10px;
+  -webkit-border-radius: 10px 0 0 10px;
+  border-radius: 10px 0 0 10px;
+}
+
+#timer .is-ready .controls, #timer .is-waiting-for-selection .controls {
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+#timer .is-pausing .controls {
+  background-color: #36BAC1;
+}
+
+#timer .ember-button {
+  border: 1px solid #999;
+  margin: 2.3em 2em 0 2em;
+  padding: 0;
+  height: 4em;
+  width: 4em;
+  background-color: white;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+#timer .ember-button:hover {
+  background-color: #ddeedd;
+  border-color: white;
+  cursor: pointer;
+}
+
+#timer .ember-button.disabled {
+  border-color: #ccc;
+  background-color: #eee;
+}
+
+#timer .ember-button.disabled:hover {
+  border-color: #ccc;
+  background-color: #eee;
+  cursor: default;
+}
+
+#timer .is-running .ember-button, #timer .is-paused .ember-button {
+  display: block;
+  height: 25px;
+  margin-top: 0;
+  -moz-border-radius: 0 0 10px 0px;
+  -webkit-border-radius: 0 0 10px 0px;
+  border-radius: 0 0 10px 10px;
+}
+
+#timer .is-running .pause, #timer .is-paused .resume {
+  margin-top: 25px;
+  -moz-border-radius: 10px 10px 0 0;
+  -webkit-border-radius: 10px 10px 0 0;
+  border-radius: 10px 10px 0 0;
+}
+
+/* TIMER GRAPHICAL */
+
+#timer #time-graphical {
+  float:left;
+  width: 23.5em;
+  height: 100%;
+}
+
+#time-bar {
+  background-color: #98BE2C;
+  height: 100%;
+  width: 0%;
+  -moz-border-radius: 0 10px 10px 0;
+  -webkit-border-radius: 0 10px 10px 0;
+  border-radius: 0 10px 10px 0;
+}
+
+#timer .is-pausing #time-bar {
+  background-color: #36BAC1;
+}
+
+/* TASKS */
+
+#tasks {
+  margin: 0 10px;
+  background-color: #E3E3E3;
+  border: 1px solid #C8C8C8;
+  padding: 0.3em;
+}
+
+#task-selection {
+  position: absolute;
+  left: 5.5em;
+  top: 1.5em;
+  width: 23.5em;
+}
+
+#task-selection h2 {
+  font-size: 1em;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.task {
+  background-color: #F2F2F2;
+  border: 1px solid #C9C9C9;
+  font-size: 0.9em;
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
+.task:hover {
+  cursor: pointer;
+}
+
+.task.selected {
+  background-color: #DEEEB8;
+}
