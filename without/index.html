@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pomodoro Timer - Statecharts</title>
+  
+  <link rel="stylesheet" href="app.css" type="text/css" media="screen" charset="utf-8">
+  
+  <script type="text/javascript" src="../jquery.js"></script>
+  <script type="text/javascript" src="../ember.js"></script>
+
+  <script type="text/javascript" src="App.js"></script>
+  <script type="text/javascript" src="controllers/TimerController.js"></script>
+  <script type="text/javascript" src="controllers/TasksController.js"></script>
+  <script type="text/javascript" src="mediators/TimerMediator.js"></script>
+  <script type="text/javascript" src="mediators/TasksMediator.js"></script>
+  <script type="text/javascript" src="views/TimerView.js"></script>
+  <script type="text/javascript" src="views/TaskView.js"></script>
+  <script type="text/javascript" src="views/TasksView.js"></script>
+  <script type="text/javascript" src="utils/Timer.js"></script>
+  
+  <script type="text/x-handlebars" data-template-name="views_timer">
+  
+    <div id="digital">
+      <div id="time-digital">
+        <span>{{remainingTimeString}}</span>
+      </div>
+    </div>
+
+    {{#with timerMediator}}
+    <div id="graphical" {{bindAttr class="isReady isRunning isPaused isPausing"}}>
+    {{/with}}
+      <div class="controls">
+        
+        {{#if timerMediator.isInactive}}
+          {{#view SC.Button class="start" disabled="disabled"}}start{{/view}}
+        {{/if}}
+      
+        {{#if timerMediator.isReady}}
+          {{#view SC.Button class="start" targetBinding="timerController" action="startPomodoro"}}start{{/view}}
+        {{/if}}
+        
+        {{#if timerMediator.isRunning}}
+          {{#view SC.Button class="pause" targetBinding="timerController" action="pausePomodoro"}}pause{{/view}}
+          {{#view SC.Button class="cancel" targetBinding="timerController" action="cancelPomodoro"}}cancel{{/view}}
+        {{/if}}
+        
+        {{#if timerMediator.isPaused}}
+          {{#view SC.Button class="resume" targetBinding="timerController" action="resumePomodoro"}}resume{{/view}}
+          {{#view SC.Button class="cancel" targetBinding="timerController" action="cancelPomodoro"}}cancel{{/view}}
+        {{/if}}
+        
+        {{#if timerMediator.isPausing}}
+          {{#view SC.Button class="cancel" targetBinding="timerController" action="cancelPause"}}reset{{/view}}
+        {{/if}}
+      </div>
+
+      <div id="time-graphical">
+        <div id="time-bar"></div>
+      </div>
+      
+      <div id="task-selection">
+        {{#if tasksMediator.workingTask}}
+          
+          {{#if timerMediator.isPausing}}
+            <h2>Pausing after: {{tasksMediator.workingTask.title}}</h2>
+          {{else}}
+            <h2>Working on: {{tasksMediator.workingTask.title}}</h2>
+          {{/if}}
+          
+        {{else}}
+        
+          {{#if tasksMediator.selectedTask}}
+            <h2>Ready for: {{tasksMediator.selectedTask.title}}</h2>
+          {{else}}
+            <h2>Select a task to start working on.</h2>
+          {{/if}}
+        {{/if}}
+      </div>
+    </div>
+
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="views_tasks">
+    {{collection id="task-list"
+                 contentBinding="content" 
+                 itemViewClass="App.TaskView"
+                 itemClass="task"
+                 tasksControllerBinding="tasksController"
+                 tasksMediatorBinding="tasksMediator"}}
+
+    {{#if tasksController.isTaskSelected}}
+      {{#view SC.Button id="delete-task" targetBinding="tasksController" action="deleteSelectedTask"}}
+        delete selected task
+      {{/view}}
+    {{/if}}
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="views_task">
+    <span class="title">{{content.title}}</span>
+  </script>
+</head>
+<body>
+  <div id="app"></div>
+</body>
+</html>
