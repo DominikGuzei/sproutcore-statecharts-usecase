@@ -14,11 +14,13 @@ App.TasksState = SC.State.extend({
   
   Selecting: SC.State.extend({
     enterState: function() {
-      App.tasksController.set('isSelecting', true);
+      App.tasksMediator.set('selectedTask', null);
+      App.tasksMediator.set('workingTask', null);
+      App.tasksMediator.set('isSelecting', true);
     },
     
     taskSelected: function(task) {
-      App.tasksController.set('selectedTask', task);
+      App.tasksMediator.set('selectedTask', task);
       App.tasksMediator.set('isSelecting', false);
       this.gotoState('Tasks.TaskSelected');
     }
@@ -30,11 +32,11 @@ App.TasksState = SC.State.extend({
     },
     
     taskSelected: function(task) {
-      App.tasksController.set('selectedTask', task);
+      App.tasksMediator.set('selectedTask', task);
     },
     
     startPomodoro: function() {
-      App.tasksController.set('workingTask', App.tasksController.get('selectedTask'));
+      App.tasksMediator.set('workingTask', App.tasksMediator.get('selectedTask'));
       this.gotoState('Tasks.WorkingOnTask');
     },
     
@@ -54,11 +56,7 @@ App.TasksState = SC.State.extend({
       App.tasksMediator.set('isDeleting', false);
       
       if(answer) {
-        try{
-          App.tasksController.deleteTask(App.tasksController.get('selectedTask'));
-        } catch(e) {
-          console.log(e.stack);
-        }
+        App.tasksController.deleteTask(App.tasksMediator.get('selectedTask'));
         this.gotoState('Tasks.Selecting');
       } else {
         this.gotoState('Tasks.TaskSelected');
@@ -84,7 +82,7 @@ App.TasksState = SC.State.extend({
     },
     
     exitState: function() {
-      App.tasksController.set('workingTask', null);
+      App.tasksMediator.set('workingTask', null);
       App.tasksMediator.set('isWorkingOnTask', false);
     }
   })
