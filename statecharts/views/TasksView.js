@@ -6,5 +6,5 @@ App.TasksView = SC.View.extend({
   tasksMediator: null,
   statechart: null,
   
-  contentBinding: 'tasksMediator.content'
+  contentBinding: 'tasksMediator.tasks'
 });

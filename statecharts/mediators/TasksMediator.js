@@ -2,7 +2,7 @@
 App.TasksMediator = SC.Object.extend({
   tasksController: null,
   
-  contentBinding: 'tasksController.content',
+  tasksBinding: 'tasksController.content',
   
   selectedTask: null,
   workingTask: null,
