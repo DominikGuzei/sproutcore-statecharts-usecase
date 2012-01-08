@@ -1,7 +1,6 @@
 
 App.TimerMediator = SC.Object.extend({
   timerController: null,
-  tasksMediator: null,
   
   elapsedSecondsBinding: 'timerController.elapsedSeconds',
   neededSecondsBinding: 'timerController.neededSeconds',
