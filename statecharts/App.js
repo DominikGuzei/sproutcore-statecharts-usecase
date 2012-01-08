@@ -2,34 +2,33 @@ var App = SC.Application.create({
   
   ready: function() {
     
-    App.tasksMediator = App.TasksMediator.create();
+    App.statechart = SC.Statechart.create({
+      
+      statesAreConcurrent: YES,
+      
+      Timer: App.TimerState,
+      Tasks: App.TasksState
+      
+    });
     
     App.tasksController = App.TasksController.create({
-      tasksMediator: App.tasksMediator
+      statechart: App.statechart
+    });
+    
+    App.tasksMediator = App.TasksMediator.create({
+      tasksController: App.tasksController
     });
     
     App.timerController = App.TimerController.create({
       timer: App.Timer.create(),
-      tasksController: App.tasksController
+      statechart: App.statechart
     });
     
     App.timerMediator = App.TimerMediator.create({
       timerController: App.timerController
     });
-
-    App.timerView = App.TimerView.create({
-      timerMediator: App.timerMediator,
-      timerController: App.timerController,
-      tasksMediator: App.tasksMediator
-    });
     
-    App.tasksView = App.TasksView.create({
-      tasksMediator: App.tasksMediator,
-      tasksController: App.tasksController
-    });
-
-    App.timerView.appendTo($('#app'));
-    App.tasksView.appendTo($('#app'));
+    App.statechart.initStatechart();
     
     this._super();
   }

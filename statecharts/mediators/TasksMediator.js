@@ -1,5 +1,15 @@
 
 App.TasksMediator = SC.Object.extend({
-  selectedTask: null,
-  workingTask: null
+  tasksController: null,
+  
+  contentBinding: 'tasksController.content',
+  
+  selectedTaskBinding: 'tasksController.selectedTask',
+  workingTaskBinding: 'tasksController.workingTask',
+  
+  isSelecting: true,
+  isTaskSelected: false,
+  isDeleting: false,
+  isWorkingOnTask: false,
+  
 });

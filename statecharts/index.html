@@ -7,8 +7,13 @@
   
   <script type="text/javascript" src="../jquery.js"></script>
   <script type="text/javascript" src="../ember.js"></script>
+  <script type="text/javascript" src="../sproutcore-statechart.min.js"></script>
 
   <script type="text/javascript" src="App.js"></script>
+  <script type="text/javascript" src="utils/Timer.js"></script>
+  <script type="text/javascript" src="utils/statechart_as_target.js"></script>
+  <script type="text/javascript" src="states/TimerState.js"></script>
+  <script type="text/javascript" src="states/TasksState.js"></script>
   <script type="text/javascript" src="controllers/TimerController.js"></script>
   <script type="text/javascript" src="controllers/TasksController.js"></script>
   <script type="text/javascript" src="mediators/TimerMediator.js"></script>
@@ -16,7 +21,6 @@
   <script type="text/javascript" src="views/TimerView.js"></script>
   <script type="text/javascript" src="views/TaskView.js"></script>
   <script type="text/javascript" src="views/TasksView.js"></script>
-  <script type="text/javascript" src="utils/Timer.js"></script>
   
   <script type="text/x-handlebars" data-template-name="views_timer">
   
@@ -36,21 +40,21 @@
         {{/if}}
       
         {{#if timerMediator.isReady}}
-          {{#view SC.Button class="start" targetBinding="timerController" action="startPomodoro"}}start{{/view}}
+          {{#view SC.Button class="start" targetBinding="statechart" action="startPomodoro"}}start{{/view}}
         {{/if}}
         
         {{#if timerMediator.isRunning}}
-          {{#view SC.Button class="pause" targetBinding="timerController" action="pausePomodoro"}}pause{{/view}}
-          {{#view SC.Button class="cancel" targetBinding="timerController" action="cancelPomodoro"}}cancel{{/view}}
+          {{#view SC.Button class="pause" targetBinding="statechart" action="pausePomodoro"}}pause{{/view}}
+          {{#view SC.Button class="cancel" targetBinding="statechart" action="cancelPomodoro"}}cancel{{/view}}
         {{/if}}
         
         {{#if timerMediator.isPaused}}
-          {{#view SC.Button class="resume" targetBinding="timerController" action="resumePomodoro"}}resume{{/view}}
-          {{#view SC.Button class="cancel" targetBinding="timerController" action="cancelPomodoro"}}cancel{{/view}}
+          {{#view SC.Button class="resume" targetBinding="statechart" action="resumePomodoro"}}resume{{/view}}
+          {{#view SC.Button class="cancel" targetBinding="statechart" action="cancelPomodoro"}}cancel{{/view}}
         {{/if}}
         
         {{#if timerMediator.isPausing}}
-          {{#view SC.Button class="cancel" targetBinding="timerController" action="cancelPause"}}reset{{/view}}
+          {{#view SC.Button class="cancel" targetBinding="statechart" action="cancelPausing"}}reset{{/view}}
         {{/if}}
       </div>
 
@@ -59,7 +63,7 @@
       </div>
       
       <div id="task-selection">
-        {{#if tasksMediator.workingTask}}
+        {{#if tasksMediator.isWorkingOnTask}}
           
           {{#if timerMediator.isPausing}}
             <h2>Pausing after: {{tasksMediator.workingTask.title}}</h2>
@@ -85,11 +89,11 @@
                  contentBinding="content" 
                  itemViewClass="App.TaskView"
                  itemClass="task"
-                 tasksControllerBinding="tasksController"
-                 tasksMediatorBinding="tasksMediator"}}
+                 tasksMediatorBinding="tasksMediator"
+                 statechartBinding="statechart"}}
 
-    {{#if tasksController.isTaskSelected}}
-      {{#view SC.Button id="delete-task" targetBinding="tasksController" action="deleteSelectedTask"}}
+    {{#if tasksMediator.isTaskSelected}}
+      {{#view SC.Button id="delete-task" targetBinding="statechart" action="deleteSelectedTask"}}
         delete selected task
       {{/view}}
     {{/if}}

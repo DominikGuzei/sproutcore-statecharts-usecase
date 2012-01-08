@@ -4,8 +4,8 @@ App.TimerView = SC.View.extend({
   templateName: 'views_timer',
   elementId: 'timer',
   timerMediator: null,
-  timerController: null,
   tasksMediator: null,
+  statechart: null,
   
   remainingTimeString: SC.computed(function() {
     var remainingSeconds = this.get('timerMediator').get('remainingSeconds');
