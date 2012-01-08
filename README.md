@@ -50,3 +50,6 @@ With Statechart
 * Statements: 422
 * complexity (lower = better): 1.3541666666666667
 * Maintainability Index (higher = better): 136.90510416666666
+
+The results show that statecharts add more lines of code but lower complexity and improve the overall maintainability
+of the code base.
