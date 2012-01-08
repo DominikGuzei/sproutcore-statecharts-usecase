@@ -2,10 +2,10 @@ var App = SC.Application.create({
   
   ready: function() {
     
-    App.tasksMediator = App.TasksMediator.create();
+    App.tasksController = App.TasksController.create();
     
-    App.tasksController = App.TasksController.create({
-      tasksMediator: App.tasksMediator
+    App.tasksMediator = App.TasksMediator.create({
+      tasksController: App.tasksController
     });
     
     App.timerController = App.TimerController.create({

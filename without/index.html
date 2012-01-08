@@ -59,7 +59,7 @@
       </div>
       
       <div id="task-selection">
-        {{#if tasksMediator.workingTask}}
+        {{#if tasksMediator.isWorkingOnTask}}
           
           {{#if timerMediator.isPausing}}
             <h2>Pausing after: {{tasksMediator.workingTask.title}}</h2>

@@ -1,7 +1,10 @@
 
 App.TasksController = SC.ArrayProxy.extend({
-  tasksMediator: null,
+
   content: [{ title: "First Task"}, { title: "Second Task"}],
+  
+  selectedTask: null,
+  workingTask: null,
   
   isSelecting: true,
   isTaskSelected: false,
@@ -11,7 +14,7 @@ App.TasksController = SC.ArrayProxy.extend({
   taskSelected: function(task) {
     if(this.get('isSelecting') || this.get('isTaskSelected')) {
       this.set('isSelecting', false);
-      this.get('tasksMediator').set('selectedTask', task);
+      this.set('selectedTask', task);
       this.set('isTaskSelected', true);
     }
   },
@@ -24,10 +27,9 @@ App.TasksController = SC.ArrayProxy.extend({
       var answer = confirm('Delete selected task?');
 
       if(answer) {
-        var tasksMediator = this.get('tasksMediator');
-        var selectedTask = tasksMediator.get('selectedTask');
+        var selectedTask = this.get('selectedTask');
         
-        tasksMediator.set('selectedTask', null);
+        this.set('selectedTask', null);
         
         this.set('isDeleting', false);
         this.set('isSelecting', true);
@@ -44,8 +46,7 @@ App.TasksController = SC.ArrayProxy.extend({
     if(this.get('isTaskSelected')) {
       this.set('isTaskSelected', false);
       
-      var tasksMediator = this.get('tasksMediator');
-      tasksMediator.set('workingTask', tasksMediator.get('selectedTask'));
+      this.set('workingTask', this.get('selectedTask'));
       
       this.set('isWorkingOnTask', true);
     }
@@ -57,8 +58,8 @@ App.TasksController = SC.ArrayProxy.extend({
       
       this.set('isWorkingOnTask', false);
       
-      tasksMediator.set('selectedTask', tasksMediator.get('workingTask'));
-      tasksMediator.set('workingTask', null);
+      this.set('selectedTask', this.get('workingTask'));
+      this.set('workingTask', null);
       
       this.set('isTaskSelected', true);
     }
