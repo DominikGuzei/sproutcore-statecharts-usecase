@@ -38,15 +38,15 @@ jsmeter was used to measure the two complete javascript code bases and here are 
 Without Statechart
 ------------------
 
-*Lines of Code: 593
-*Statements: 426
-*complexity (lower = better): 2.0344827586206895
-*Maintainability Index (higher = better): 125.21396551724136
+* Lines of Code: 593
+* Statements: 426
+* complexity (lower = better): 2.0344827586206895
+* Maintainability Index (higher = better): 125.21396551724136
 
 With Statechart
 ------------------
 
-*Lines of Code: 647
-*Statements: 422
-*complexity (lower = better): 1.3541666666666667
-*Maintainability Index (higher = better): 136.90510416666666
+* Lines of Code: 647
+* Statements: 422
+* complexity (lower = better): 1.3541666666666667
+* Maintainability Index (higher = better): 136.90510416666666
