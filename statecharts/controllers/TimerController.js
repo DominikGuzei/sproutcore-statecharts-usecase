@@ -43,9 +43,9 @@ App.TimerController = SC.Object.extend({
   _timeOver: function() {
     var statechart = this.get('statechart');
     if(statechart.stateIsCurrentState('Timer.Pomodoro.Running')) {
-      this.get('statechart').sendAction('finishedPomodoro');
+      statechart.sendAction('finishedPomodoro');
     } else {
-      this.get('statechart').sendAction('finishedPausing');
+      statechart.sendAction('finishedPausing');
     }
   }
   
